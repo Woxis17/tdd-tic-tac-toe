@@ -5,7 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TicTacToeTest {
 
@@ -30,10 +30,22 @@ public class TicTacToeTest {
         ticTacToe.put(1,3);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void whenPutOnOccupiedFieldThenExpectRuntimeException() {
         ticTacToe.put(0,0);
+        expectedException.expect(RuntimeException.class);
         ticTacToe.put(0,0);
+    }
+
+    @Test
+    public void givenFirstTurnWhenWhoIsNextThenX() {
+        assertEquals(TicTacToe.X, ticTacToe.nextPlayer());
+    }
+
+    @Test
+    public void givenSecondTurnWhenWhoIsNextThenO() {
+        ticTacToe.put(0,0);
+        assertEquals(TicTacToe.O, ticTacToe.nextPlayer());
     }
 
 }
